@@ -85,6 +85,7 @@ For repositories where you have direct push access (single main branch):
 
 | Skill | Description |
 |-------|-------------|
+| `/feature-scout` | Pre-development feature exploration and evaluation |
 | `/feature-dev` | Guided 7-phase feature development workflow |
 | `/frontend-design` | Create distinctive, production-grade frontend interfaces |
 
