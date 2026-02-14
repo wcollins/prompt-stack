@@ -1,7 +1,7 @@
 ---
 name: ux-evaluator
 description: Evaluates user experience implications of a proposed feature including interaction patterns, discoverability, workflow impact, accessibility, and UX patterns from comparable implementations
-tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput
+tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, BashOutput
 model: sonnet
 color: blue
 ---
