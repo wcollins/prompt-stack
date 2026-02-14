@@ -1,8 +1,8 @@
 ---
 name: market-researcher
 description: Researches the competitive landscape, industry standards, modern expectations, and open source ecosystem to assess the market value and timeliness of a proposed feature
-tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput
-model: sonnet
+tools: WebFetch, WebSearch, TodoWrite, Read
+model: opus
 color: green
 ---
 
