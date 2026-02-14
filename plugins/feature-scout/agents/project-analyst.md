@@ -1,7 +1,7 @@
 ---
 name: project-analyst
 description: Analyzes existing project state, architecture, scope, health signals, and related features to assess how a proposed feature fits within the current codebase
-tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput
+tools: Glob, Grep, LS, Read, NotebookRead, TodoWrite, BashOutput
 model: sonnet
 color: yellow
 ---
