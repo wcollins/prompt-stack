@@ -143,6 +143,12 @@ plan/<feature-name>/
 └── feature-prompt.md       # Implementation-ready prompt (if recommended)
 ```
 
+## What to Expect
+
+A typical evaluation takes 5-15 minutes depending on project size and research depth. The evaluation report (`feature-evaluation.md`) is usually 200-400 lines covering project context, competitive landscape, UX analysis, and a structured feasibility assessment. The implementation prompt (`feature-prompt.md`) is typically 150-300 lines and is designed to be fully self-contained — usable by any coding assistant without additional context.
+
+The quality of market research depends on the feature's domain. Well-established feature types (authentication, plugin systems, real-time collaboration) produce rich competitive analysis. Novel or niche features may yield thinner market data — the evaluation will note this explicitly rather than speculating.
+
 ## When to Use This Plugin
 
 **Use for:**
