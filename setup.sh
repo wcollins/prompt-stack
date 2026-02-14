@@ -9,6 +9,7 @@
 # This script installs all skills to ~/.claude/skills/:
 # - prompt-stack: branch-trunk, pr-trunk, reset-trunk, etc.
 # - feature-dev: feature-dev
+# - feature-scout: feature-scout
 # - frontend-design: frontend-design
 # - ralph-wiggum: ralph-loop, cancel-ralph, help
 #
@@ -24,6 +25,7 @@ PLUGINS_DIR="${SCRIPT_DIR}/plugins"
 # Bundled plugins to install
 BUNDLED_PLUGINS=(
     "feature-dev"
+    "feature-scout"
     "frontend-design"
     "ralph-wiggum"
 )
