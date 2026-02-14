@@ -49,10 +49,13 @@ Capture these details — they inform every subsequent phase.
 **Goal**: Deeply understand the current project to assess how the feature fits
 
 **Actions**:
+
+**CRITICAL**: When launching agents, always include the full feature description, the problem statement, and any user context gathered in Phase 1. Do not send agents out with only a category label — they need the specific feature context to focus their analysis on what matters for this particular feature.
+
 1. Launch 2-3 project-analyst agents in parallel. Each agent should focus on a different aspect:
-   - "Analyze the overall project scope, maturity, and architecture to understand what this project is and where it's headed"
-   - "Find features related to [feature idea] and trace their implementation. Identify reusable components and extension points."
-   - "Assess project health: test coverage, documentation quality, dependency state, and technical debt relevant to [feature area]"
+   - "The proposed feature is: [full feature description from Phase 1]. It aims to solve: [problem statement]. Analyze the overall project scope, maturity, and architecture. Focus on how the project's current direction relates to this feature and whether the architecture is positioned to support it."
+   - "The proposed feature is: [full feature description from Phase 1]. Find existing features related to this idea and trace their implementation. Identify reusable components, extension points, and patterns that this feature could leverage or would need to extend."
+   - "The proposed feature is: [full feature description from Phase 1]. Assess project health in areas relevant to this feature: test coverage in related modules, documentation quality for the integration surface, dependency state, and technical debt that would affect implementation."
 
    Each agent should return a list of 5-10 essential files.
 
@@ -63,6 +66,12 @@ Capture these details — they inform every subsequent phase.
    - Key architectural patterns and extension points
    - Health signals that affect the build decision
    - Reusable components the feature could leverage
+4. **Existence check**: If the project analysis reveals that the proposed feature substantially already exists in the codebase (even if incomplete or in a different form), present this finding to the user before proceeding. Options:
+   - Continue the evaluation focused on the gap between current and desired state
+   - Pivot to evaluating specific enhancements to the existing implementation
+   - Exit with a recommendation to use `/feature-dev` directly for the enhancement
+
+   If the feature does not already exist, proceed to Phase 3.
 
 ---
 
@@ -83,6 +92,12 @@ Capture these details — they inform every subsequent phase.
    - Available libraries or reference implementations
    - Evidence of user demand (or lack thereof)
    - Timing: is now the right moment for this?
+4. **Checkpoint**: Present market research findings to the user before proceeding. If findings fundamentally change the evaluation direction (e.g., a mature library already solves this, competitors have abandoned this approach, the feature is being deprecated industry-wide), confirm with the user whether to:
+   - Continue with UX analysis as planned
+   - Pivot the evaluation scope (e.g., evaluate library integration instead of building from scratch)
+   - Exit early with a preliminary recommendation
+
+   If no pivotal findings, briefly confirm with the user and proceed to Phase 4.
 
 ---
 
@@ -127,6 +142,13 @@ This phase does NOT launch agents — it synthesizes findings from Phases 2-4.
    - Effort estimate: Relative size (Small / Medium / Large / Very Large)
    - Risk level: What could go wrong? (Low / Medium / High)
    - Maintenance burden: Ongoing cost after initial build (Minimal / Moderate / High)
+
+   **Weighting Guidance**:
+   - **Primary value drivers**: Strategic alignment and problem significance. A feature that solves a critical problem aligned with the project's mission is valuable even if market positioning is unclear.
+   - **Primary cost driver**: Risk level. High risk (data loss, security implications, architectural instability) should outweigh effort estimates in the recommendation.
+   - **Tiebreaker**: User impact. When value and cost are balanced, broad+deep user impact tips toward Build; narrow+shallow tips toward Defer.
+   - A high-value, high-risk feature should generally be "Build with caveats" (scoped down to reduce risk) rather than "Skip."
+   - A low-value, low-cost feature should generally be "Defer" rather than "Build" — low effort does not justify low value.
 
    **Overall Recommendation**:
    - **Build** — High value, reasonable cost. Worth committing development time.
@@ -251,6 +273,14 @@ Only proceed with this phase if the recommendation is **Build** or **Build with 
 
 [Project description, tech stack, and relevant architecture — enough context for a
 coding assistant unfamiliar with the project to orient themselves]
+
+## Evaluation Context
+
+[Brief summary of the key evaluation findings that shaped this prompt:
+- Market insight that influenced the approach (e.g., "Competitors X and Y both use library Z for this")
+- UX decision rationale (e.g., "Progressive disclosure recommended because comparable tools show high abandonment with upfront complexity")
+- Risk mitigations baked into the requirements (e.g., "Scoped to read-only initially due to data integrity risk identified in evaluation")
+- Link to the full evaluation: `plan/<feature-name>/feature-evaluation.md`]
 
 ## Feature Description
 
