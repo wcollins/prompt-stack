@@ -61,6 +61,12 @@ For repositories where you have direct push access (single main branch):
 - RC (`v0.1.0-rc.N`) - Release candidate
 - Stable (`v0.1.0`) - Production ready
 
+### Content
+
+| Skill | Description |
+|-------|-------------|
+| `/blog [blog \| talk \| project \| link]` | Add new content to the wcollins.io blog |
+
 ### Utilities
 
 | Skill | Description |
