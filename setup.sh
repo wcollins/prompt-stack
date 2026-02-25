@@ -12,6 +12,7 @@
 # - feature-scout: feature-scout
 # - frontend-design: frontend-design
 # - ralph-wiggum: ralph-loop, cancel-ralph, help
+# - podcast: tcg-prep
 #
 # Safe to run multiple times (idempotent).
 
@@ -27,6 +28,7 @@ BUNDLED_PLUGINS=(
     "feature-dev"
     "feature-scout"
     "frontend-design"
+    "podcast"
     "ralph-wiggum"
 )
 
