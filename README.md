@@ -158,11 +158,11 @@ Creates web components, pages, or applications with bold aesthetic choices — d
 |---------|-------------|
 | `/gif-create [command]` | Create polished terminal GIFs with VHS |
 
-Iteratively records and refines a terminal GIF — adjusting timing, colors, and dimensions until it meets your criteria. Outputs to `assets/`, `docs/images/`, or a custom path.
+Analyzes your command's output to calculate optimal dimensions, timing, and pauses — then iteratively records and refines until it meets your criteria. Supports per-project brand configuration via `.gif-create.yml` so every GIF in a project stays consistent. All artifacts (`.tape` files and GIFs) persist in the consuming repository under `assets/gifs/` by default.
 
 Requires: [VHS](https://github.com/charmbracelet/vhs) and ffmpeg.
 
-**When to use:** Documentation demos, social media content, anything that needs a visual of terminal output.
+**When to use:** Documentation demos, README walkthroughs, social media content, anything that needs a visual of terminal output.
 
 ---
 
@@ -187,6 +187,166 @@ Requires: [VHS](https://github.com/charmbracelet/vhs) and ffmpeg.
 | `/sync-gridctl` | Fix inaccurate claims in AGENTS.md against actual code |
 
 Two-phase release: first creates a PR with changelog, then (after merge) tags the release to trigger CI/CD. Supports alpha, beta, RC, and stable versioning.
+
+## Terminal GIF Creation Guide
+
+`/gif-create` is designed to work across any project. Brand guidelines, output paths, and defaults are configured per-project so GIFs stay consistent without repeating yourself.
+
+### Prerequisites
+
+```bash
+# macOS
+brew install vhs ffmpeg
+
+# Or via Go
+go install github.com/charmbracelet/vhs@latest
+```
+
+### Quick Start
+
+```
+/gif-create kubectl get pods
+```
+
+The skill will:
+1. Run the command and measure its output (lines, width, execution time)
+2. Calculate optimal GIF dimensions, typing speed, and pause durations
+3. Show you the analysis and let you override any values
+4. Generate a `.tape` file and record the GIF
+5. Present the result for review — iterate until you're happy
+
+### Setting Up Brand Guidelines
+
+Create a `.gif-create.yml` in your project root to define brand settings once:
+
+```yaml
+# .gif-create.yml
+
+brand:
+  # Use a built-in theme...
+  theme: "Tokyo Night"
+
+  # ...or define custom colors
+  colors:
+    background: "#0d1117"
+    foreground: "#c9d1d9"
+    border: "#7C3AED"
+
+  font_family: "JetBrains Mono"
+  font_size: 14
+  padding: 20
+
+defaults:
+  # github-readme (800x500) | documentation (1200x600) | social-media (1280x720)
+  preset: "github-readme"
+  typing_speed: "50ms"
+
+paths:
+  tapes: "assets/gifs/tapes"
+  output: "assets/gifs"
+```
+
+> [!TIP]
+> If you run `/gif-create` without a config file, the skill will prompt you interactively and then offer to save your choices to `.gif-create.yml` for next time.
+
+**Brand color sources:**
+- **Custom hex colors** — Set `brand.colors` with your exact brand palette
+- **VHS themes** — Set `brand.theme` to one of: Dracula, Tokyo Night, Catppuccin Mocha, Nord, Gruvbox, One Dark, Solarized Dark
+- **Project docs** — The skill can also extract colors from your AGENTS.md or README if you choose the interactive path
+
+### How Command Analysis Works
+
+Before designing the tape, the skill runs your command and measures the output:
+
+| Metric | What it determines |
+|--------|--------------------|
+| Line count | GIF height — sized to fit all output without scrolling |
+| Max line width | GIF width — wide enough for the longest line |
+| Execution time | Post-command sleep — enough time for output to render |
+| Command length | Typing speed — shorter commands type naturally, longer ones type faster |
+
+You always see the calculated values and can override anything before recording.
+
+### Output Structure
+
+By default, artifacts live under `assets/gifs/`:
+
+```
+your-project/
+├── .gif-create.yml            # brand config (project root)
+└── assets/
+    └── gifs/
+        ├── tapes/             # .tape source files (versionable)
+        │   ├── deploy-demo.tape
+        │   └── help-output.tape
+        ├── deploy-demo.gif    # generated GIFs
+        └── help-output.gif
+```
+
+Tape files persist so you can re-record without the skill:
+
+```bash
+# Edit the tape directly, then regenerate
+vhs assets/gifs/tapes/deploy-demo.tape
+```
+
+Override paths in `.gif-create.yml` if your project uses a different convention:
+
+```yaml
+paths:
+  tapes: "docs/recordings/tapes"
+  output: "docs/recordings"
+```
+
+### Step-by-Step Walkthrough
+
+**1. Start the skill**
+
+```
+/gif-create myapp deploy --env staging
+```
+
+**2. Brand context** — If no `.gif-create.yml` exists, the skill asks how to style the GIF (theme, hex color, extract from docs, or defaults). If the config file exists, this step is skipped.
+
+**3. Output preset** — Choose dimensions if not set in config: GitHub README (800x500), Documentation (1200x600), Social media (1280x720), or custom.
+
+**4. Command analysis** — The skill runs the command, measures output, and presents calculated settings:
+
+```
+Command analysis:
+- Output: 24 lines, max 72 chars wide
+- Execution time: 1.2s
+- Calculated dimensions: 800x500
+- Post-command sleep: 2s
+- Typing speed: 40ms
+```
+
+Override any value or accept and continue.
+
+**5. Record** — VHS generates the GIF. Review the result and choose: accept, adjust timing, adjust colors, adjust dimensions, or re-record. Up to 5 iterations.
+
+**6. Finalize** — GIF is saved to the output directory. If over 5MB, the skill offers optimization via `gifsicle`. You get embed snippets for markdown and HTML.
+
+### Examples
+
+**Minimal — just record a command:**
+```
+/gif-create terraform plan
+```
+
+**With a config file already set up:**
+```
+/gif-create cargo test -- --nocapture
+```
+The skill reads `.gif-create.yml`, analyzes the command, and generates a brand-consistent GIF with no prompts.
+
+**Multi-step demo:**
+```
+/gif-create
+```
+Choose "Demo workflow" and describe the sequence. The skill builds a tape with multiple commands, appropriate pauses between steps, and `Hide`/`Show` to skip boring parts.
+
+---
 
 ## Project Structure
 
