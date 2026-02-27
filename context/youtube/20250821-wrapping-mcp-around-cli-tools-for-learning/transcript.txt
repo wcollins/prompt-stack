@@ -1,0 +1,323 @@
+Let's clone ourselves a Git repo.
+0:00:00 – 0:00:10
+
+How many words a minute do I type? I don't know.
+0:00:10 – 0:00:14
+
+So, from here...
+0:00:14 – 0:00:24
+
+We're going to pop into the backup Arista lab.
+0:00:24 – 0:00:27
+
+And I'm going to go ahead and expand this, just so we can kind of see what's going on.
+0:00:27 – 0:00:33
+
+Pretty standard Container Lab topology, nothing too special.
+0:00:33 – 0:00:36
+
+I have two spines, and I have four leafs.
+0:00:36 – 0:00:41
+
+And basically, I'm just doing layer 3 routed links between the spine and leaf switches with slash 31s.
+0:00:41 – 0:00:50
+
+And BGP all the way, so underlay and overlay, all BGP, all the time, it's the best.
+0:00:50 – 0:00:57
+
+And then some VXLAN things for the VLAN bridging and the VRF routing stuff.
+0:00:57 – 0:01:04
+
+So, if I look for the startup config, when these start up, they're going to be instantiated with these configs that are stored in this directory over here.
+0:01:04 – 0:01:17
+
+And, oh yeah. Honestly, I had so much fun.
+0:01:17 – 0:01:21
+
+I actually handcrafted, artisan, just had so much fun crafting this banner.
+0:01:21 – 0:01:28
+
+I haven't written a banner since I was studying for CCNA way, way, way, way, way back, when I had all my hair and I was in shape.
+0:01:28 – 0:01:39
+
+But, yeah, a lot of fun.
+0:01:39 – 0:01:41
+
+Anyway, you've got to have fun when you're doing this stuff, don't you?
+0:01:41 – 0:01:44
+
+So, looking at the topology back up here.
+0:01:44 – 0:01:51
+
+So, basically, what I have up here, and this is the part that's maybe interesting that you don't normally see a lot.
+0:01:51 – 0:01:59
+
+So, I work for a company called Itential, and they have this incredible gateway product.
+0:01:59 – 0:02:05
+
+This is their free tool, Terraro.
+0:02:05 – 0:02:08
+
+So, when MCP came out last November, when something new and disruptive comes out, the way that I learn about it is I need to build things with it.
+0:02:08 – 0:02:19
+
+So, what I did was I took this Terraro CLI tool, and I built a really primitive API, really primitive MCP server, really primitive UI,
+0:02:19 – 0:02:30
+
+just to kind of figure out and make sense of all these components myself.
+0:02:30 – 0:02:35
+
+So, that's what's going to happen here.
+0:02:35 – 0:02:37
+
+So, along with these other network nodes, it's going to instantiate this automation gateway.
+0:02:37 – 0:02:44
+
+And at runtime, it's actually going to import the automation that I want to run.
+0:02:44 – 0:02:49
+
+So, let's go ahead and run this thing.
+0:02:49 – 0:02:52
+
+I'm having the time of my life, and I've never felt this way before.
+0:02:59 – 0:03:07
+
+Okay.
+0:03:07 – 0:03:08
+
+So, ContainerLab does this neat thing where it prints out all the stuff you need.
+0:03:08 – 0:03:14
+
+So, first things first, you can basically use Docker Exec, if you're using Docker, to run commands against these things.
+0:03:14 – 0:03:22
+
+So, let's say that I wanted to run a command against this spine.
+0:03:22 – 0:03:31
+
+So, I can do something like spine1-cli-c.
+0:03:31 – 0:03:51
+
+I think that's right.
+0:03:51 – 0:03:52
+
+It's a long command.
+0:03:52 – 0:03:55
+
+Show BGPE VPN summary.
+0:03:55 – 0:04:02
+
+Awesome.
+0:04:02 – 0:04:03
+
+So, okay, great.
+0:04:03 – 0:04:05
+
+I got the command right on the first time.
+0:04:05 – 0:04:06
+
+And also, that Exec at the beginning, usually it's Docker Exec-IT and all this other stuff.
+0:04:06 – 0:04:11
+
+I have like a bash alias to at least make the first part of the command a little easier.
+0:04:11 – 0:04:16
+
+So, let's run something else.
+0:04:16 – 0:04:24
+
+Let's look at one of the leafs.
+0:04:24 – 0:04:31
+
+Show vxlan vtip.
+0:04:31 – 0:04:38
+
+Nice.
+0:04:38 – 0:04:41
+
+Show vxlan vni.
+0:04:41 – 0:04:46
+
+Awesome.
+0:04:46 – 0:04:47
+
+So, we have a working network topology here.
+0:04:47 – 0:04:49
+
+We're running some things in ContainerLab, and we have this gateway.
+0:04:49 – 0:04:53
+
+And another thing, too.
+0:04:53 – 0:04:54
+
+So, if I go back here and I look at the IPs, they all have, you know, given this is a lab environment, nothing too crazy,
+0:04:54 – 0:05:00
+
+they all have admin-admin, this login.
+0:05:00 – 0:05:03
+
+So, I'm going to log in to this gateway.
+0:05:03 – 0:05:11
+
+And then see if it instantiated my service on here.
+0:05:11 – 0:05:20
+
+Awesome.
+0:05:20 – 0:05:21
+
+So, I have my backup service that I want to run against all these Arista nodes.
+0:05:21 – 0:05:27
+
+Now, let's go ahead and switch over to Cloud Desktop.
+0:05:27 – 0:05:34
+
+Let's start out by doing something simple.
+0:05:34 – 0:05:49
+
+Okay, so we are fit as a fiddle.
+0:05:49 – 0:05:54
+
+Awesome.
+0:05:54 – 0:05:55
+
+Healthy and available.
+0:05:55 – 0:05:58
+
+Now, let's see if it can recognize what services we have running.
+0:05:58 – 0:06:15
+
+So, it's going to use the list services call.
+0:06:15 – 0:06:19
+
+Okay, well, it's returning my service.
+0:06:19 – 0:06:23
+
+And you know what?
+0:06:23 – 0:06:25
+
+I want a little more detail.
+0:06:25 – 0:06:27
+
+So, let's ask it to describe this service with a little more details.
+0:06:27 – 0:06:42
+
+Describe the backup Arista service in more detail.
+0:06:42 – 0:06:52
+
+There we go.
+0:06:52 – 0:06:53
+
+We have the name, the type of automation it is, a nice description, service ID,
+0:06:53 – 0:07:00
+
+the repository that it was imported from, all the tags.
+0:07:00 – 0:07:06
+
+I love tagging things.
+0:07:06 – 0:07:08
+
+Playbook, inventory, all the goodies.
+0:07:08 – 0:07:10
+
+Awesome.
+0:07:10 – 0:07:11
+
+Looks like we're in good shape.
+0:07:11 – 0:07:12
+
+So, let's go ahead and run this thing.
+0:07:12 – 0:07:30
+
+Success.
+0:07:30 – 0:07:31
+
+Woo-hoo.
+0:07:31 – 0:07:32
+
+Yeah.
+0:07:32 – 0:07:33
+
+Time to celebrate.
+0:07:33 – 0:07:34
+
+So, it's going to give me a little executive summary.
+0:07:34 – 0:07:39
+
+We were successful.
+0:07:39 – 0:07:41
+
+All these goodies, configs were backed up to this location as I had defined.
+0:07:41 – 0:07:49
+
+All is well.
+0:07:49 – 0:07:50
+
+Now, let's check the web UI and see what's going on there.
+0:07:50 – 0:07:55
+
+Awesome.
+0:07:55 – 0:07:56
+
+So, we can see we have one service available to run.
+0:07:56 – 0:07:59
+
+It took 29 seconds to back all those suckers up, 100% success rate.
+0:07:59 – 0:08:04
+
+And I have my standard out execution data.
+0:08:04 – 0:08:09
+
+Awesome.
+0:08:09 – 0:08:12
+
+So, this has been really interesting to take something like a CLI tool
+0:08:12 – 0:08:19
+
+and then wrap some of these other features around it.
+0:08:19 – 0:08:22
+
+And, again, mind you, it's for the sake of learning.
+0:08:22 – 0:08:25
+
+You know, I did this to educate myself on MCP.
+0:08:25 – 0:08:28
+
+MCP is so hot right now in the industry.
+0:08:28 – 0:08:31
+
+When you're experimenting and you're tinkering around
+0:08:31 – 0:08:34
+
+and you want to know, like, all those other things that an MCP interacts with.
+0:08:34 – 0:08:40
+
+So, if you're curious on, like, all the things that are happening behind the scenes here
+0:08:40 – 0:08:44
+
+or, like, why I even spent the time to build this,
+0:08:44 – 0:08:48
+
+I'm going to be going through everything step by step in some subsequent videos
+0:08:48 – 0:08:53
+
+because, again, this is just the way I learn.
+0:08:53 – 0:08:56
+
+I don't have to build, integrate, and mess around with things just so I understand things.
+0:08:56 – 0:09:01
+
+You know, without understanding those little foundations,
+0:09:01 – 0:09:04
+
+MCP might seem like a little magic or a little crazy or you may even not trust it.
+0:09:04 – 0:09:09
+
+But the more you get into it, the more you understand it,
+0:09:09 – 0:09:12
+
+the more you start peeling back those layers, it's not magic.
+0:09:12 – 0:09:16
+
+You'll begin to recognize it's a logical evolution of, you know, proven communication patterns
+0:09:16 – 0:09:24
+
+adapted for this AI era that we live in.
+0:09:24 – 0:09:27
