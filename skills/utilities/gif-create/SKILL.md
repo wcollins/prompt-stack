@@ -1,9 +1,9 @@
 ---
 description: >
   Create terminal GIFs with VHS, iterating until output meets brand/style criteria.
-  Supports per-project brand config via .gif-create.yml. Analyzes command output to
+  Supports per-project brand config via assets/.gif-create.yml. Analyzes command output to
   determine optimal sizing, timing, and pauses. Tape files and GIFs persist in the
-  consuming repository. Trigger when the user mentions: create a gif, terminal gif,
+  consuming repository under assets/. Trigger when the user mentions: create a gif, terminal gif,
   record a command, vhs recording, demo gif, make a gif, screen recording, cli demo,
   terminal recording, record terminal output, gif-create.
 argument-hint: "[command] (e.g., 'kubectl get pods', 'cargo build --release')"
@@ -31,7 +31,7 @@ If not found, show install instructions and stop.
 
 ### 1.2 Load Project Config
 
-Look for `.gif-create.yml` (or `.gif-create.yaml`) in the project root.
+Look for `assets/.gif-create.yml` (or `assets/.gif-create.yaml`) in the consuming project.
 
 If found, parse it and use values as defaults for all subsequent phases. See `references/config-schema.md` for the full schema. Key sections:
 - `brand` — theme, colors, font settings
@@ -61,7 +61,7 @@ Skip any step where the project config already provides the value.
 
 ### 2.1 Brand Context
 
-Ask only if `.gif-create.yml` has no `brand` section:
+Ask only if `assets/.gif-create.yml` has no `brand` section:
 
 > How should we style the GIF?
 
@@ -73,7 +73,7 @@ Options:
 
 ### 2.2 Output Preset
 
-Ask only if `.gif-create.yml` has no `defaults` section:
+Ask only if `assets/.gif-create.yml` has no `defaults` section:
 
 > What output format?
 
@@ -85,9 +85,9 @@ Options:
 
 ### 2.3 Offer Config Scaffold
 
-If no `.gif-create.yml` exists and the user provided brand/output preferences interactively, offer to create one:
+If no `assets/.gif-create.yml` exists and the user provided brand/output preferences interactively, offer to create one:
 
-> Save these settings to `.gif-create.yml` so future GIFs use the same brand?
+> Save these settings to `assets/.gif-create.yml` so future GIFs use the same brand?
 
 If yes, write the config file using the values gathered. See `references/config-schema.md` for the schema.
 
@@ -118,7 +118,7 @@ Clean up: `rm -f /tmp/gif-create-analysis.txt`
 
 ### 3.2 Calculate Optimal Settings
 
-Use the metrics to determine tape settings. These supplement (not override) any values from `.gif-create.yml` — config values always win.
+Use the metrics to determine tape settings. These supplement (not override) any values from `assets/.gif-create.yml` — config values always win.
 
 **Height calculation:**
 - Base: line count from output + 3 lines padding (prompt + blank lines)
@@ -169,8 +169,8 @@ Let the user override any value before proceeding.
 ### 4.1 Resolve Directories
 
 Determine tape and output paths:
-- From `.gif-create.yml` `paths` section, or
-- Default: `assets/gifs/tapes/` for tapes, `assets/gifs/` for output
+- From `assets/.gif-create.yml` `paths` section, or
+- Default: `assets/tapes/` for tapes, `assets/gifs/` for output
 
 ```bash
 mkdir -p <tape-dir> <output-dir>
@@ -316,7 +316,7 @@ The tape file persists in the project — edit it directly and re-run `vhs` to r
 
 ```tape
 Output assets/gifs/myapp-help.gif
-# Tape: assets/gifs/tapes/myapp-help.tape
+# Tape: assets/tapes/myapp-help.tape
 Set Width 800
 Set Height 500
 Set FontSize 14
@@ -334,7 +334,7 @@ Sleep 3s
 
 ```tape
 Output assets/gifs/deploy-demo.gif
-# Tape: assets/gifs/tapes/deploy-demo.tape
+# Tape: assets/tapes/deploy-demo.tape
 Set Width 1200
 Set Height 700
 Set FontSize 14
@@ -367,7 +367,7 @@ For a command that outputs 45 lines of text at 90 chars wide:
 
 ```tape
 Output assets/gifs/test-results.gif
-# Tape: assets/gifs/tapes/test-results.tape
+# Tape: assets/tapes/test-results.tape
 Set Width 800
 Set Height 680
 Set FontSize 14
