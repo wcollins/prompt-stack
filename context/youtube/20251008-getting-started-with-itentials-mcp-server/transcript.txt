@@ -1,0 +1,158 @@
+Let's set up iTentials MCP server.
+0:00:00 – 0:00:10
+
+Now, there happens to be many ways that you can do this, and I'm just going to focus on
+0:00:10 – 0:00:16
+
+the way I do it for day-to-day testing and sandboxing and such.
+0:00:16 – 0:00:24
+
+But first off, I use something called Orbstack. It's kind of like a fast and easy way to run
+0:00:24 – 0:00:32
+
+Linux VMs and containers on a Mac, because Mac is not exactly easy when you get into
+0:00:32 – 0:00:41
+
+containerization. It's just a little bit challenging sometimes. And with Linux, I kind of always
+0:00:41 – 0:00:45
+
+get a consistent, pain-free experience. So for most of my testing, I'm usually running
+0:00:45 – 0:00:52
+
+inside Debian Linux.
+0:00:52 – 0:00:55
+
+So let's go ahead and connect to this VM that we're going to run the MCP server on, and
+0:00:55 – 0:01:04
+
+change into my handy-dandy sandbox directory, and let's go ahead and clone the MCP server.
+0:01:04 – 0:01:16
+
+Okay, here we go. Now, we use something called UV to manage this project, which is kind of
+0:01:16 – 0:01:31
+
+like an extremely fast kind of all-in-one Python package and project manager. So first
+0:01:31 – 0:01:39
+
+things first, let's set up a virtual environment. And if you're doing it this way, I suggest
+0:01:39 – 0:01:44
+
+always using a virtual environment, unless you have an affinity for wasting lots of time
+0:01:44 – 0:01:50
+
+troubleshooting and you thrive on inefficiency. Oops. Oh, what version of Python? I always
+0:01:50 – 0:01:59
+
+freeze here. Let's just do 3.11. Okay, so then we need to activate it. All right, and
+0:01:59 – 0:02:11
+
+dependencies. So we've got to install the dependencies as well. All right, and we are
+0:02:11 – 0:02:22
+
+actually done here. Now, say that new features get rolled out with the MCP server, which
+0:02:22 – 0:02:27
+
+they do very frequently, you can basically just come back here and do a git pull, and
+0:02:27 – 0:02:34
+
+you're going to have the newest stuff for the next time that you instantiate this with
+0:02:34 – 0:02:38
+
+whatever client that you're using. So next, let's take a look at the cloud desktop configuration
+0:02:38 – 0:02:49
+
+file. So as you can see here, it's very nice and clean. Now, I only have two servers in
+0:02:49 – 0:02:55
+
+here. So for my intentional MCP server, I'm simply running a command that references a
+0:02:55 – 0:03:05
+
+wrapper script, essentially. So the reason I do it this way is because Cloud Desktop's
+0:03:05 – 0:03:10
+
+JSON config is only going to support direct string values. It's not going to be able to
+0:03:10 – 0:03:18
+
+do environment variable expansion. So unlike what we would expect in a shell script, the
+0:03:18 – 0:03:25
+
+JSON parser doesn't interpret environment variable syntax. So let's take a look at the
+0:03:25 – 0:03:31
+
+wrapper script now. So for my setup, I use an external secrets fault and generate these
+0:03:31 – 0:03:40
+
+environment variables whenever I log into my session. And then when I log out, it just
+0:03:40 – 0:03:45
+
+kind of wipes everything out, meaning I don't have any long-lived secrets floating around
+0:03:45 – 0:03:50
+
+on my machine in various places, various files that I forget about one day. So this script
+0:03:50 – 0:03:56
+
+is going to basically expand those values and pass the configuration from my host machine
+0:03:56 – 0:04:02
+
+to the VM and then run the MCP server. So now all I need to do is open Cloud Desktop
+0:04:02 – 0:04:10
+
+on my MacBook. So now let's test it and make sure that it's working. So if we go in here,
+0:04:10 – 0:04:16
+
+we should see all of the intentional tools that we have available to use. And we're just
+0:04:16 – 0:04:21
+
+going to do something quick and easy. Let's just run a health check. Actually, what's
+0:04:21 – 0:04:34
+
+the fun and quick and easy? Let's do something off the beaten path. Let's do a search for
+0:04:34 – 0:04:40
+
+potential brand guidelines and let's OK, let's copy a link to those. And let's do something
+0:04:40 – 0:04:54
+
+different. So. For every response in this chat. Use brevity. And clear and concise data
+0:04:54 – 0:05:16
+
+don't over explain anything. And actually, let's represent our answers in a dashboard
+0:05:16 – 0:05:24
+
+everything so. Represent all answers in a dashboard that you render from potential brand
+0:05:24 – 0:05:34
+
+guidelines here. And let's have it do something beyond a health check. Health check's always
+0:05:34 – 0:05:41
+
+just a. Easy thing to try. Let's do let's get job metrics. Let's see how this plays
+0:05:41 – 0:05:54
+
+out. So it fetched the brand guidelines. Now it's getting job metrics. OK, so. Excellent.
+0:05:54 – 0:06:12
+
+Let's see what it comes up with. And the cool thing about this, I mean, I'm just thinking
+0:06:12 – 0:06:17
+
+kind of out loud here, but say that you have scenarios where you have numerous tools you're
+0:06:17 – 0:06:23
+
+working with and you're getting data from this place and that place, and then you want
+0:06:23 – 0:06:28
+
+to wrap them up into a reporting style that matches your whatever your company is, your
+0:06:28 – 0:06:34
+
+company's brand guidelines and send a report to your boss in the form of a PDF frequently
+0:06:34 – 0:06:40
+
+or even another team. That is pretty cool. OK, there we go. Let's expand this a little
+0:06:40 – 0:06:47
+
+bit and make it a little bigger. We have one hundred and ninety three workflows, over two
+0:06:47 – 0:06:53
+
+thousand jobs completed. That's pretty awesome. And it's using all of our colors and all the
+0:06:53 – 0:07:00
+
+brand guideline material from the link that I provided. Pretty neat. Until next time.
+0:07:00 – 0:07:07
