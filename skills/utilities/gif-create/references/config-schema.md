@@ -1,11 +1,11 @@
 # Project Configuration Schema
 
-The gif-create skill looks for a `.gif-create.yml` file in the project root. This file lets projects define brand guidelines, output defaults, and directory conventions once — so every GIF created in the project is consistent without interactive prompts.
+The gif-create skill looks for an `assets/.gif-create.yml` file in the consuming project. This file lets projects define brand guidelines, output defaults, and directory conventions once — so every GIF created in the project is consistent without interactive prompts.
 
 ## Full Schema
 
 ```yaml
-# .gif-create.yml
+# assets/.gif-create.yml
 
 # Brand / visual identity
 brand:
@@ -46,7 +46,7 @@ defaults:
 # Directory conventions
 paths:
   # Where .tape files are stored (relative to project root)
-  tapes: "assets/gifs/tapes"
+  tapes: "assets/tapes"
   # Where generated GIFs are saved
   output: "assets/gifs"
 ```
@@ -78,5 +78,5 @@ paths:
 - All paths are relative to the project root
 - `brand.colors` takes precedence over `brand.theme` when both are set
 - The config file is optional — the skill falls back to interactive prompts
-- Commit `.gif-create.yml` to version control so the team shares brand consistency
+- Commit `assets/.gif-create.yml` to version control so the team shares brand consistency
 - The `paths.tapes` directory is useful for versioning tape files alongside the project
