@@ -1,0 +1,50 @@
+How many of you have heard of Occam's Razor? This 14th-century philosophical principle has helped me both personally and professionally over the years, and it basically means this.
+0:00:00 – 0:00:12
+
+When you're staring at multiple explanations for something, or maybe you have more than one hypothesis, the one with the fewest assumptions, the simplest, should be preferred.
+0:00:12 – 0:00:23
+
+And I think the original framing was something like, uh, entities should not be multiplied frivolously.
+0:00:23 – 0:00:31
+
+But my translation on this beautiful Wednesday is, stop adding stuff you don't need, please.
+0:00:31 – 0:00:37
+
+And yet, we love to ignore this in tech, and generative AI is inflaming the problem.
+0:00:37 – 0:00:43
+
+So, why does this even matter? Well, it matters because the entire tech industry has an incentive to make things complicated.
+0:00:43 – 0:00:51
+
+Complexity sells, you know, let's be real. It justifies headcow. It makes consultants a lot of money, but it's extremely at odds with your ability to execute.
+0:00:51 – 0:01:01
+
+Here's a thought exercise, maybe an example. So, everyone wants multi-cloud. You know, we need optionality, we can't get locked in no matter what, that would be terrible.
+0:01:01 – 0:01:11
+
+So, you spend half a year building abstraction layers, cloud agnostic modules, Kubernetes, all the things everywhere, and you're not locked in.
+0:01:11 – 0:01:21
+
+You're feeling pretty good about yourself, right? But here's the problem. You haven't shipped anything.
+0:01:21 – 0:01:27
+
+Your competitor launched six weeks ago, and they're already iterating on some customer feedback while you're still arguing and debating infrastructure patterns.
+0:01:27 – 0:01:37
+
+So, what might be the alternative here? You could just pick one provider, go native, use their managed services, and ship your product in three weeks, get some customers, learn, iterate.
+0:01:37 – 0:01:49
+
+Then, you know, maybe down the road, you're looking, you know, six months later, when you have real usage data showing, like, hey, this specific workload runs 40% cheaper somewhere else, that's when you move it.
+0:01:49 – 0:02:01
+
+You know, that's optimizing, you know, from hard data and evidence, and not this lock-in anxiety that you see.
+0:02:01 – 0:02:08
+
+The best engineers I've ever had the privilege of working with that really made a difference all did something you might find surprising.
+0:02:08 – 0:02:15
+
+They deleted code, they reduced dependencies, they asked, hey, what's the simplest thing that could possibly work here?
+0:02:15 – 0:02:24
+
+Because simple wins.
+0:02:24 – 0:02:25

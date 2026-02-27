@@ -1,0 +1,467 @@
+In today's video, we're going to be doing some container labs, some open tofu, some
+0:00:00 – 0:00:13
+
+terraro, and one password.
+0:00:13 – 0:00:17
+
+Yes, you heard me right, I am talking about the Secrets Vault.
+0:00:17 – 0:00:21
+
+And of course, I wouldn't dare leave out every Marketing Team's new best friend, Model Context
+0:00:21 – 0:00:28
+
+Protocol, or MCP.
+0:00:28 – 0:00:31
+
+So what is the motivation behind today's video?
+0:00:31 – 0:00:35
+
+So itential just launched Terraro 1.5.
+0:00:35 – 0:00:40
+
+And with that launch came the ability to do secrets injection to services.
+0:00:40 – 0:00:46
+
+So the thing I like about this is the secrets can be associated with services at creation
+0:00:46 – 0:00:53
+
+time, and dynamically injected during service execution.
+0:00:53 – 0:01:00
+
+I like my sneakers white and my automation ephemeral, it's how I like to keep things.
+0:01:00 – 0:01:05
+
+So for secrets in Terraro, so here's the release notes for the 1.5 launch.
+0:01:05 – 0:01:11
+
+Basically, we use asymmetrical encryption.
+0:01:11 – 0:01:15
+
+So the first thing you have to do is create an encryption key and then reference that
+0:01:15 – 0:01:18
+
+key in your Terraro.conf file.
+0:01:18 – 0:01:21
+
+So once this is set up, you can create secrets and then couple them with a service when you
+0:01:21 – 0:01:26
+
+build or import that service.
+0:01:26 – 0:01:28
+
+So my goal with what we're going to look at today is just keeping the whole thing ephemeral.
+0:01:28 – 0:01:32
+
+You know, I want to source my secrets from somewhere nice and safe, like a tool agnostic
+0:01:32 – 0:01:37
+
+vault.
+0:01:37 – 0:01:39
+
+And I don't want my secrets to ever touch the disk in plain text, because that'd be
+0:01:39 – 0:01:44
+
+very naughty.
+0:01:44 – 0:01:46
+
+And I want to be on Santa's nice list.
+0:01:46 – 0:01:48
+
+And then from there, I want to inject them into Terraro vault at runtime, and then execute
+0:01:48 – 0:01:54
+
+my services and then tear the whole thing down and we're done.
+0:01:54 – 0:01:58
+
+Well, you may be wondering, hey, William, how are you going to get your secrets from
+0:01:58 – 0:02:02
+
+1Password into Terraro?
+0:02:02 – 0:02:05
+
+I wrote a script to do that, a pretty simple script using 1Password's developer API, which
+0:02:05 – 0:02:13
+
+is pretty awesome.
+0:02:13 – 0:02:14
+
+I might as well look at that script and explain what's going on.
+0:02:14 – 0:02:18
+
+OK, so let's see.
+0:02:18 – 0:02:26
+
+So the first part here is basically just going to select the profiles.
+0:02:26 – 0:02:36
+
+So when I set up secrets in 1Password, you know, it can be API keys, just plain, you
+0:02:36 – 0:02:43
+
+know, whatever type of secrets that I want to use.
+0:02:43 – 0:02:46
+
+This is basically going to ask which secret profiles that I want to grab.
+0:02:46 – 0:02:51
+
+So I might have different profiles, say, for like lab AWS or, you know, non-prod Azure
+0:02:51 – 0:03:00
+
+or however I want to, you know, sort of organize my secrets.
+0:03:00 – 0:03:04
+
+So I want to reference just those profiles that are in scope for what I'm doing.
+0:03:04 – 0:03:09
+
+I don't want to pull everything in.
+0:03:09 – 0:03:10
+
+And that would be that would be a bad idea.
+0:03:10 – 0:03:13
+
+And then.
+0:03:13 – 0:03:15
+
+I want the ability to basically look at, you know, at any given time, I've got like a ton
+0:03:15 – 0:03:21
+
+of containers running.
+0:03:21 – 0:03:23
+
+So of course, I only want to inject those secrets into the specific container and scope
+0:03:23 – 0:03:29
+
+for what I'm trying to do.
+0:03:29 – 0:03:32
+
+And that's what this does.
+0:03:32 – 0:03:34
+
+And then I also want to check, you know, just call it a little health check.
+0:03:34 – 0:03:38
+
+And I want to make sure the container that I picked is still actually running before
+0:03:38 – 0:03:43
+
+we try to do anything with it.
+0:03:43 – 0:03:45
+
+And based on whenever you set up a new Terrero secrets fault, you have to generate an encryption
+0:03:45 – 0:03:53
+
+key.
+0:03:53 – 0:03:54
+
+So this is going to create that 256 bit encryption key for securing the secrets inside the container
+0:03:54 – 0:03:59
+
+at runtime.
+0:03:59 – 0:04:00
+
+And then we've got to reference that encryption key.
+0:04:00 – 0:04:04
+
+This component right here, this create Terrero conf, it's either going to create a new one
+0:04:04 – 0:04:09
+
+from scratch or update the secret section in an existing one.
+0:04:09 – 0:04:14
+
+And then we got the magic.
+0:04:14 – 0:04:15
+
+This is this is the main event.
+0:04:15 – 0:04:17
+
+So this connects to one password, it's going to grab the secrets from that specific profile.
+0:04:17 – 0:04:24
+
+And then it's going to create them inside Terrero's secret store at runtime for readability
+0:04:24 – 0:04:31
+
+and consistency.
+0:04:31 – 0:04:33
+
+It just basically uses the names that I've already defined in my secrets fault.
+0:04:33 – 0:04:40
+
+And then it's just going to make them lowercase and hyphen separated just for human readable
+0:04:40 – 0:04:44
+
+consistency across the board.
+0:04:44 – 0:04:46
+
+Enough about that.
+0:04:46 – 0:04:49
+
+Let's go ahead and look at our container lab setup.
+0:04:49 – 0:04:53
+
+So again, this is public on GitHub, the Terrero dev GitHub.
+0:04:53 – 0:04:57
+
+But if I look at the container lab file, this is usually when you run container lab, you
+0:04:57 – 0:05:05
+
+think of it as like a, you know, you're you also have like a lot of network images running
+0:05:05 – 0:05:09
+
+as well.
+0:05:09 – 0:05:10
+
+I named this one cloud runner, because that's kind of what this is operating as is it's
+0:05:10 – 0:05:15
+
+going to mimic the behavior of like what a cloud runner would be like, if you think of
+0:05:15 – 0:05:20
+
+like GitHub actions, or, you know, any other CI CD platform, the goal with the cloud runner
+0:05:20 – 0:05:26
+
+is to be ephemeral.
+0:05:26 – 0:05:27
+
+So you have some sort of thing that's spun up, like some version of Linux, they're really
+0:05:27 – 0:05:33
+
+scaled down images that only run what you need.
+0:05:33 – 0:05:37
+
+And then at runtime, so you run a pipeline of sorts.
+0:05:37 – 0:05:40
+
+And that's going to inject your, you know, whatever input variables you might have, or
+0:05:40 – 0:05:45
+
+secrets, you know, in this case secrets, it's going to do your automation for you.
+0:05:45 – 0:05:50
+
+And then it's going to be torn down right afterwards, keeping the whole thing ephemeral.
+0:05:50 – 0:05:54
+
+If I come down here, this exec command is basically going to import my the automation
+0:05:54 – 0:06:01
+
+I want to run from GitHub at runtime.
+0:06:01 – 0:06:06
+
+So let's go ahead and launch this real quick.
+0:06:06 – 0:06:11
+
+Okay, that's nice and quick.
+0:06:11 – 0:06:18
+
+And let's see, make sure we can ping it.
+0:06:18 – 0:06:24
+
+And let's go ahead and log into it.
+0:06:24 – 0:06:34
+
+So I should see the two services that I was Yep, so two services, one to basically create
+0:06:34 – 0:06:39
+
+a state back end, which I already have this created right here, because I was I was actually
+0:06:39 – 0:06:44
+
+doing some other testing.
+0:06:44 – 0:06:46
+
+I'm actually right before I recorded this video, but I don't have this AWS VPC created.
+0:06:46 – 0:06:53
+
+And that's a good point.
+0:06:53 – 0:06:54
+
+Let's switch back over.
+0:06:54 – 0:06:55
+
+And I want to look at the so what I'm going to end up running here is this lab right here.
+0:06:55 – 0:07:04
+
+And actually, I want to look at the automation component of it.
+0:07:04 – 0:07:10
+
+All it is, it's just a very simple, hey, we're, we're creating an AWS VPC.
+0:07:10 – 0:07:15
+
+And we're also going to create multiple subnets.
+0:07:15 – 0:07:18
+
+That's it, not complicated, super simple.
+0:07:18 – 0:07:21
+
+And there are resources that are free to deploy and tear down.
+0:07:21 – 0:07:24
+
+Coming back here, if I do a I should see I have no secrets, spell secrets, right.
+0:07:24 – 0:07:34
+
+So I want to get those secrets.
+0:07:34 – 0:07:36
+
+So let's go ahead and run the secrets stuff.
+0:07:36 – 0:07:42
+
+And I want to reference the AWS profile.
+0:07:42 – 0:07:46
+
+And I have want to do container number two.
+0:07:46 – 0:07:52
+
+Alright, so now I have these secrets right here.
+0:07:52 – 0:07:59
+
+Again, let's just log in and make sure they're there.
+0:07:59 – 0:08:02
+
+Sure everything worked okay.
+0:08:02 – 0:08:07
+
+So in this container, right now, I have these secrets available to run.
+0:08:07 – 0:08:12
+
+And I'm going to use them against this AWS VPC service right here, instead of running
+0:08:12 – 0:08:21
+
+things the normal way.
+0:08:21 – 0:08:24
+
+Let's do this with MCP.
+0:08:24 – 0:08:25
+
+I think that would be kind of fun.
+0:08:25 – 0:08:28
+
+Let's just make sure everything's talking by doing the health check.
+0:08:28 – 0:08:32
+
+Okay, we are good.
+0:08:32 – 0:08:35
+
+And let's see what services we have available to run.
+0:08:35 – 0:08:44
+
+Okay, so I have those two services that I imported at runtime.
+0:08:44 – 0:08:54
+
+Let's get a few more details about the service as well.
+0:08:54 – 0:09:05
+
+Can you describe the AWS VPC service in a little more detail?
+0:09:05 – 0:09:13
+
+And this is going to give me all the goodies, it's going to show me what secrets that we
+0:09:13 – 0:09:18
+
+have.
+0:09:18 – 0:09:19
+
+And this is what I was looking for, specifically to show you.
+0:09:19 – 0:09:22
+
+So all those secrets that we basically referenced at runtime from one password are now exposed
+0:09:22 – 0:09:32
+
+in this service inside the container.
+0:09:32 – 0:09:35
+
+Now let's go ahead and run this service.
+0:09:35 – 0:09:39
+
+Actually, you know what, let's do something.
+0:09:39 – 0:09:45
+
+Let's go off the beaten path real quick.
+0:09:45 – 0:09:48
+
+So if I go back to, there we go, the OpenTofu project that I'm going to run, I can see that
+0:09:48 – 0:09:57
+
+there's a few defaults in here.
+0:09:57 – 0:09:59
+
+So the VPC CIDR block is going to default to using 10.250.00.
+0:09:59 – 0:10:05
+
+And the subnet CIDRs are as follows.
+0:10:05 – 0:10:10
+
+Let's talk to do something different, see what happens.
+0:10:10 – 0:10:15
+
+Let me run service AWS VPC with VPC CIDR block equal to let's do 10.5.0.0 slash 20.
+0:10:15 – 0:10:32
+
+And subnet CIDRs.
+0:10:32 – 0:10:46
+
+And okay, so we're basically just going to use a different range.
+0:10:46 – 0:10:52
+
+So we're going to use a 10.5.0.0 slash 20 and then we're just going to do dot 1.2 and
+0:10:52 – 0:10:58
+
+dot 3.0 slash 24 for the subnets.
+0:10:58 – 0:11:05
+
+Let's see what it does here.
+0:11:05 – 0:11:10
+
+So it should be figuring out how to base it.
+0:11:10 – 0:11:14
+
+So basically what it's going to do is it's going to pass these in to basically override
+0:11:14 – 0:11:18
+
+the defaults that I have set in the OpenTofu configuration.
+0:11:18 – 0:11:27
+
+So I didn't format it the way that it was expecting.
+0:11:27 – 0:11:30
+
+Let's see if it figures out how to format that for me.
+0:11:30 – 0:11:38
+
+Hopefully.
+0:11:38 – 0:11:39
+
+Hey, there we go.
+0:11:39 – 0:11:43
+
+That wasn't too bad.
+0:11:43 – 0:11:45
+
+So this VPC now exists with this CIDR range at the VPC level and each one of these subnets
+0:11:45 – 0:11:56
+
+in different availability zones.
+0:11:56 – 0:11:59
+
+Now what I'm going to do now is I'm going to tell Claw Desktop to destroy it.
+0:11:59 – 0:12:19
+
+All right, we're good.
+0:12:19 – 0:12:20
+
+So that VPC no longer exists.
+0:12:20 – 0:12:25
+
+So I mean, just to kind of recap what we've done here is we use Container Lab to spin
+0:12:25 – 0:12:32
+
+up Torero in a container and then we referenced some OpenTofu configuration inside of GitHub.
+0:12:32 – 0:12:40
+
+And when we went to launch that at runtime, it fetched some variables from one password,
+0:12:40 – 0:12:45
+
+fed them into Torero's new secret store, attached those secrets to this VPC service that I wanted
+0:12:45 – 0:12:52
+
+to run, deployed the VPC, deployed the subnets, and then we destroyed them.
+0:12:52 – 0:12:59
+
+Pretty fun stuff.
+0:12:59 – 0:13:01
+
+Until next time.
+0:13:01 – 0:13:02
