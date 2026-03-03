@@ -66,6 +66,7 @@ For repositories where you have direct push access (single main branch):
 | Skill | Description |
 |-------|-------------|
 | `/blog [blog \| talk \| project \| link]` | Add new content to the wcollins.io blog |
+| `/content-script [script \| series]` | Create technical content scripts with demo notes and screen sharing cues |
 
 ### Utilities
 
