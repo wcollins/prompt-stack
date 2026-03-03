@@ -1,5 +1,5 @@
 ---
-description: Intake and research a podcast guest  - pull Calendly data, create intake folder, deep research, generate theme and topics, fill planning template
+description: Intake and research a podcast guest  - pull Calendly data, create intake folder, deep research, generate theme and topics, fill planning template, generate host script
 argument-hint: "Guest Name"
 ---
 
@@ -332,9 +332,107 @@ Research complete for <Guest Name>
 
 ---
 
+## Part 2b: Host Script
+
+### Step 13: Generate Host Script
+
+After research is approved and the planning doc is updated, generate a full host script for the episode. This is what the host reads and references during recording.
+
+**Read the podcast voice guide** at `references/voice-guide.md` before writing.
+
+**Script structure:**
+
+```markdown
+# The Cloud Gambit - <Episode Theme>
+## Guest: <Guest Name> | <Job Title>, <Company>
+## Recording: <Month Day, Year>
+
+---
+
+### Cold Open
+
+<2-3 sentences setting up the episode's theme. Hook the listener with a trend,
+a provocative question, or a relatable scenario. Written in William's voice.>
+
+---
+
+### Guest Welcome
+
+<Natural intro welcoming the guest. Brief context on who they are and why
+they're on the show - 2-3 sentences max. Don't read their resume; set up
+the conversation.>
+
+---
+
+### Discussion Flow
+
+#### Topic 1: <Topic Title>
+**Context:** <1-2 sentences of background from research - what the host knows going in>
+**Lead-in:** <Natural transition or opening line to introduce this topic>
+**Questions:**
+- <Primary question - open-ended, specific, drawn from research>
+- <Follow-up if needed>
+
+#### Topic 2: <Topic Title>
+**Context:** <background>
+**Lead-in:** <transition from previous topic>
+**Questions:**
+- <Primary question>
+- <Follow-up>
+
+<...repeat for all approved topics...>
+
+---
+
+### Wrap-Up
+
+<Closing remarks - thank the guest, summarize the big takeaway in 1-2
+sentences, point listeners to where they can find the guest's work. Warm
+and genuine.>
+
+---
+
+### Outro
+
+<Standard show sign-off. Keep it brief and energetic.>
+```
+
+**Writing rules:**
+- Write in William's voice - conversational, direct, technically grounded
+- Lead-ins should feel like natural bridges, not "next question" pivots
+- Questions must be specific to the guest's work - no generic interview questions like "tell us about your background"
+- Reference concrete findings from research (a blog post, a talk, a project) in context and questions
+- Keep the cold open punchy - under 4 sentences
+- Guest welcome should make the guest feel valued without being sycophantic
+- Each topic's context section is for the host's eyes - quick reminders of what the research found
+- Use single dashes only - never em dashes or en dashes
+
+**Save the script to:**
+```
+script/podcast/<YYYYMMDD>-<firstname-lastname>.md
+```
+
+Use the recording date and guest name, all lowercase with hyphens. Example: `script/podcast/20260315-john-doe.md`
+
+### Step 14: Present Script for Review
+
+Show the host script to the user:
+
+> **Host script generated:**
+>
+> <full script content>
+>
+> **Saved to:** `script/podcast/<filename>.md`
+>
+> Want to adjust anything before we move to the guest email?
+
+**Wait for approval or edits before proceeding.** If the user requests changes, update the file and re-present.
+
+---
+
 ## Part 3: Guest Email
 
-### Step 13: Share Planning Document
+### Step 15: Share Planning Document
 
 Share the planning doc with the guest so they can comment.
 
@@ -344,7 +442,7 @@ Use `mcp__gridctl__zapier__google_drive_add_file_sharing_preference` to share:
 
 Save the sharing URL returned - this is the `[[PlanningDoc]]` link.
 
-### Step 14: Compose Email
+### Step 16: Compose Email
 
 Build the guest email from the email-template (ID: `1ChLS8AKddlZ3V_-NOM5cPebp4eH4cL7ZOlbIi2ovNPI`).
 
@@ -373,7 +471,7 @@ William Collins
 Founder, Co-Host
 ```
 
-### Step 15: Prompt for Approval
+### Step 17: Prompt for Approval
 
 **Do NOT send the email without explicit approval.**
 
@@ -392,23 +490,23 @@ Present the composed email to the user:
 >
 > Send this email? (yes / edit / skip)
 
-- If **yes**: proceed to Step 16
+- If **yes**: proceed to Step 18
 - If **edit**: apply the user's changes and re-present
 - If **skip**: skip the email, note it in the final report
 
 **Wait for the user's response before proceeding.**
 
-### Step 16: Send Email
+### Step 18: Send Email
 
 Use the Zapier Gmail MCP tool to send the email:
 - **To**: guest email address from Step 1
-- **Subject**: composed subject from Step 14
-- **Body**: composed HTML body from Step 14 - use `<a href="<sharing URL>">this link</a>` for the `[[PlanningDoc]]` hyperlink
+- **Subject**: composed subject from Step 16
+- **Body**: composed HTML body from Step 16 - use `<a href="<sharing URL>">this link</a>` for the `[[PlanningDoc]]` hyperlink
 - **From**: thecloudgambit@gmail.com
 
 > **Note:** The exact Zapier Gmail tool name may vary (e.g., `mcp__gridctl__zapier__gmail_send_email`). Use ToolSearch to find the available Gmail send action if the name doesn't match.
 
-### Step 17: Final Report
+### Step 19: Final Report
 
 ```
 Prep complete for <Guest Name>
@@ -421,6 +519,8 @@ Prep complete for <Guest Name>
     Intake folder: <folder name> (<folder URL>)
     Planning doc:  <file name> (<file URL>)
     Shared with:   <guest email> (commenter)
+
+  Host script: script/podcast/<filename>.md
 
   Email:
     Sent to:  <guest email>
