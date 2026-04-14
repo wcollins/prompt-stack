@@ -65,33 +65,23 @@ Based on the task description in `$ARGUMENTS`:
 | "update README with Podman instructions" | `docs/readme-podman-instructions` |
 | "bump Redis version to 7.4" | `chore/bump-redis-version` |
 
-### 5. Confirm Branch Name
-
-Use `AskUserQuestion` to present the generated branch name and let user confirm or provide alternative.
-
-### 6. Create and Switch to Branch
+### 5. Create and Switch to Branch
 
 ```bash
-git checkout -b <confirmed-branch-name>
+git checkout -b <branch-name>
 ```
 
-### 7. Make Requested Changes
+### 6. Return Control
 
-Implement the task described in `$ARGUMENTS`. Make all necessary file changes.
-
-### 8. Return Control to User
-
-After completing changes, inform the user:
-
-> Changes complete on branch `<branch-name>`.
+> Branch `<branch-name>` created and checked out.
 >
 > Next steps:
-> 1. Review changes: `git diff`
-> 2. Test locally
-> 3. When ready, run `/pr-fork` to commit and create pull request
+> 1. Make changes
+> 2. When ready, run `/pr-fork` to commit and create pull request
 
 ## Important Rules
 
 - **Do NOT create any commits**
 - **Do NOT push to remote**
-- Control returns to user for testing and validation
+- **Do NOT implement changes** — branching only creates the branch
+- Generate the branch name automatically — do not ask for confirmation
