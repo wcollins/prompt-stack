@@ -20,7 +20,7 @@ You are helping a developer evaluate whether a feature idea is worth building be
 - **Be honest about value**: A "don't build this" recommendation saves more time than a weak "maybe"
 - **Read files identified by agents**: When launching agents, ask them to return lists of important files. After agents complete, read those files to build context before proceeding.
 - **Use TodoWrite**: Track all progress throughout
-- **Outputs stay local**: All deliverables go to `plan/` which is .gitignored — this is a thinking space
+- **Outputs go to prompt-stack**: All deliverables go to `<prompt-stack>/prompts/<project>/` so they are version-controlled alongside your skills. Resolve the prompt-stack root by reading `~/.claude/.prompt-stack-root`. Derive the project name from the current working directory basename (e.g., if working in `~/code/gridctl`, project is `gridctl`).
 
 ---
 
@@ -163,13 +163,20 @@ This phase does NOT launch agents — it synthesizes findings from Phases 2-4.
 
 ## Phase 6: Feature Evaluation Report
 
-**Goal**: Create a comprehensive evaluation document in `plan/`
+**Goal**: Create a comprehensive evaluation document
 
 **Actions**:
-1. Generate a short, descriptive folder name for the feature (kebab-case, 3-5 words)
+1. Resolve the prompts directory:
+   ```bash
+   PROMPT_STACK_ROOT=$(cat ~/.claude/.prompt-stack-root)
+   PROJECT_NAME=$(basename "$PWD")
+   PROMPTS_DIR="${PROMPT_STACK_ROOT}/prompts/${PROJECT_NAME}"
+   ```
+   Create the directory if it doesn't exist.
+2. Generate a short, descriptive folder name for the feature (kebab-case, 3-5 words)
    - Examples: `oauth-integration`, `cli-plugin-system`, `real-time-notifications`
-2. Create the directory: `plan/<feature-name>/`
-3. Write `plan/<feature-name>/feature-evaluation.md` with this structure:
+3. Create the directory: `${PROMPTS_DIR}/<feature-name>/`
+4. Write `${PROMPTS_DIR}/<feature-name>/feature-evaluation.md` with this structure:
 
 ```markdown
 # Feature Evaluation: [Feature Name]
@@ -253,7 +260,7 @@ change for this to become viable.]
 [URLs and sources from market research, listed as bullet points]
 ```
 
-4. Inform the user that the evaluation has been written and where to find it
+5. Inform the user that the evaluation has been written and where to find it
 
 ---
 
@@ -264,7 +271,7 @@ change for this to become viable.]
 Only proceed with this phase if the recommendation is **Build** or **Build with caveats**. If the recommendation is Defer or Skip, inform the user the evaluation is complete and skip this phase.
 
 **Actions**:
-1. Write `plan/<feature-name>/feature-prompt.md` with this structure:
+1. Write `${PROMPTS_DIR}/<feature-name>/feature-prompt.md` (using the same prompts directory resolved in Phase 6) with this structure:
 
 ```markdown
 # Feature Implementation: [Feature Name]
@@ -280,7 +287,7 @@ coding assistant unfamiliar with the project to orient themselves]
 - Market insight that influenced the approach (e.g., "Competitors X and Y both use library Z for this")
 - UX decision rationale (e.g., "Progressive disclosure recommended because comparable tools show high abandonment with upfront complexity")
 - Risk mitigations baked into the requirements (e.g., "Scoped to read-only initially due to data integrity risk identified in evaluation")
-- Link to the full evaluation: `plan/<feature-name>/feature-evaluation.md`]
+- Link to the full evaluation: `<prompts-dir>/<feature-name>/feature-evaluation.md`]
 
 ## Feature Description
 
@@ -350,16 +357,15 @@ be specific and verifiable.]
 
 2. Present a summary of what was created and where to find both files
 3. Suggest next steps:
-   - Review the evaluation in `plan/<feature-name>/feature-evaluation.md`
-   - If ready to build, use the prompt in `plan/<feature-name>/feature-prompt.md` with `/feature-dev` or any coding assistant
+   - Review the evaluation in `${PROMPTS_DIR}/<feature-name>/feature-evaluation.md`
+   - If ready to build, run `/feature-build` — it will find the prompt and let you select it
    - If adjustments needed, iterate on the prompt before building
 
 ---
 
 ## Important Notes
 
-- The `plan/` directory should already exist and be .gitignored. If it doesn't exist, create it and warn the user to add it to .gitignore.
-- All outputs are local thinking artifacts — they never enter version control.
+- Prompts are stored in prompt-stack at `prompts/<project>/<feature>/`. If `~/.claude/.prompt-stack-root` doesn't exist, fall back to `plan/` in the current directory and warn the user to run prompt-stack's `setup.sh`.
 - Be direct in recommendations. "Build with caveats" is better than a wishy-washy "maybe".
 - If market research turns up limited results, say so. Absence of data is itself a signal.
 - The implementation prompt should be self-contained — someone with no prior context should be able to use it effectively.
