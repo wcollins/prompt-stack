@@ -1,0 +1,82 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/visual-agent-builder-playground/feature-prompt.md",
+  "feature_name": "visual-agent-builder-playground",
+  "workflow": "fork",
+  "issue_number": 300,
+  "total_phases": 9,
+  "current_phase": 8,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Backend core: pkg/runtime/agent/ package with TestFlightSession, AuthMode, LLMClient interface; implement Path A (Anthropic) and three API endpoints in internal/api/playground.go; write tests",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/runtime-agent-playground-backend",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/301"
+    },
+    {
+      "index": 1,
+      "description": "Auth endpoint + detection: implement POST /api/playground/auth to detect vault API keys and CLI availability",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/playground-auth-detection",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/302"
+    },
+    {
+      "index": 2,
+      "description": "Playground tab (minimal): add playground to BottomPanelTab, create PlaygroundTab.tsx with auth status and basic message input, wire to POST /api/playground/chat",
+      "build_skill": "frontend-design",
+      "status": "completed",
+      "branch": "feature/playground-tab-minimal",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/303"
+    },
+    {
+      "index": 3,
+      "description": "SSE streaming: implement GET /api/playground/stream SSE endpoint, connect frontend usePlaygroundStore to consume SSE events, render streaming tokens in chat",
+      "build_skill": "frontend-design",
+      "status": "completed",
+      "branch": "feature/playground-sse-streaming",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/304"
+    },
+    {
+      "index": 4,
+      "description": "Reasoning Waterfall: add ReasoningWaterfall.tsx consuming tool_call_start and tool_call_end SSE events with expand/collapse on click",
+      "build_skill": "frontend-design",
+      "status": "completed",
+      "branch": "feature/playground-reasoning-waterfall",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/305"
+    },
+    {
+      "index": 5,
+      "description": "Canvas animation: add animated edge prop to styledEdges mapping in Canvas.tsx, add thinking ring to AgentNode",
+      "build_skill": "frontend-design",
+      "status": "completed",
+      "branch": "feature/canvas-animation-thinking-ring",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/306"
+    },
+    {
+      "index": 6,
+      "description": "Inspector Panel: add Agent Builder Mode toggle to Canvas, create AgentBuilderInspector.tsx with Config/Tools/Preview tabs, wire to useStackStore for live YAML preview, add vault key autocomplete to prompt editor",
+      "build_skill": "frontend-design",
+      "status": "completed",
+      "branch": "feature/agent-builder-inspector-panel",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/307"
+    },
+    {
+      "index": 7,
+      "description": "OpenAI + Gemini + Ollama SDK support: add openai/openai-go, googleapis/go-genai, and Ollama via custom base URL to Path A/C; add model selector and Ollama endpoint field to frontend; implement A2A edge wiring for AgentNode-to-AgentNode connections updating equipped_skills",
+      "build_skill": "frontend-design",
+      "status": "completed",
+      "branch": "feature/multi-provider-llm-model-selector",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/308"
+    },
+    {
+      "index": 8,
+      "description": "CLI proxy (Phase B): implement pkg/runtime/agent/cliproxy.go with subprocess management, update POST /api/playground/auth to include CLI detection, add Path B option to frontend model selector",
+      "build_skill": "feature-dev",
+      "status": "pending",
+      "branch": null,
+      "pr_url": null
+    }
+  ]
+}

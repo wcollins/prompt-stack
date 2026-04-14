@@ -1,0 +1,58 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/security-hardening-posture/feature-prompt.md",
+  "feature_name": "security-hardening-posture",
+  "workflow": "fork",
+  "issue_number": 331,
+  "total_phases": 6,
+  "current_phase": 5,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Create SECURITY.md and add README link",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "docs/security-hardening-posture",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/332"
+    },
+    {
+      "index": 1,
+      "description": "Create .github/dependabot.yml",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "chore/enable-dependabot-go-npm",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/333"
+    },
+    {
+      "index": 2,
+      "description": "Run govulncheck and npm audit locally, fix any findings",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "chore/resolve-dependency-vulnerabilities",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/344"
+    },
+    {
+      "index": 3,
+      "description": "Add gosec to .golangci.yml with appropriate exclusions",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "chore/add-gosec-linter",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/346"
+    },
+    {
+      "index": 4,
+      "description": "Remove continue-on-error from govulncheck and npm audit CI steps",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "chore/enforce-govulncheck-npm-audit-ci",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/347"
+    },
+    {
+      "index": 5,
+      "description": "Update CONTRIBUTING.md test policy for new functionality",
+      "build_skill": "feature-dev",
+      "status": "pending",
+      "branch": null,
+      "pr_url": null
+    }
+  ]
+}

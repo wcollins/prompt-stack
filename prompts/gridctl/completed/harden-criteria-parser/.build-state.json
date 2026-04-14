@@ -1,0 +1,50 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/harden-criteria-parser/feature-prompt.md",
+  "feature_name": "harden-criteria-parser",
+  "workflow": "trunk",
+  "issue_number": 375,
+  "total_phases": 5,
+  "current_phase": 5,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Exit code 3 in test.go — add exit-3 block for all-skipped result, update Long docstring, write test",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/test-exit-code-all-skipped",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/376"
+    },
+    {
+      "index": 1,
+      "description": "Activation gate in activate.go — parseable-criteria loop, per-criterion error output, update Long docstring, write tests",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/activate-parseable-criteria-gate",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/377"
+    },
+    {
+      "index": 2,
+      "description": "HTTP API mirror in registry.go — parseable-criteria check in handleRegistrySkillStateChange, add API test",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/api-activate-criteria-check",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/378"
+    },
+    {
+      "index": 3,
+      "description": "dry-run flag in test.go — add --dry-run flag, printDryRunResult helper, fetch skill from registry, exit code paths",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/test-dry-run-flag",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/379"
+    },
+    {
+      "index": 4,
+      "description": "Fix partial-skip PASSING lie in printTestResult — report PASSING with N skipped when skipped > 0 and failed == 0",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "fix/partial-skip-passing-lie",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/380"
+    }
+  ]
+}

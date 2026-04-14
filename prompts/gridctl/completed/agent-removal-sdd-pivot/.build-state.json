@@ -1,0 +1,26 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/agent-removal-sdd-pivot/feature-prompt.md",
+  "feature_name": "agent-removal-sdd-pivot",
+  "workflow": "fork",
+  "issue_number": 315,
+  "total_phases": 2,
+  "current_phase": 2,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Stream A: Remove agent orchestration — delete pkg/runtime/agent, pkg/a2a, pkg/adapter packages, remove agent code from shared files, clean up frontend",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/remove-agent-orchestration",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/316"
+    },
+    {
+      "index": 1,
+      "description": "Stream B: Complete spec-driven development — gridctl test command, acceptance criteria runner, wizard skill form, canvas test badge, gridctl activate enforcement",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/spec-driven-test-command",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/317"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/stdlib-servemux-routing/feature-prompt.md",
+  "feature_name": "stdlib-servemux-routing",
+  "workflow": "fork",
+  "issue_number": 406,
+  "total_phases": 8,
+  "current_phase": 7,
+  "phases": [
+    {
+      "index": 0,
+      "description": "handleStack (stack.go) — replace 8-way literal action switch with explicit HandleFunc registrations",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/handlestack-go122-servemux",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/407"
+    },
+    {
+      "index": 1,
+      "description": "handleTraces (traces.go) — replace TrimPrefix presence check with {traceId} named parameter",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/handletraces-go122-servemux",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/408"
+    },
+    {
+      "index": 2,
+      "description": "handleWizard (wizard.go) — replace TrimPrefix draft ID extraction with {id} named parameter",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/handlewizard-go122-servemux",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/409"
+    },
+    {
+      "index": 3,
+      "description": "handlePins (pins.go) — replace SplitN(3) server+action parsing with {server} named parameter routes",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/handlepins-go122-servemux",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/410"
+    },
+    {
+      "index": 4,
+      "description": "handleAgentAction + handleMCPServerAction (api.go) — replace SplitN name/action parsing with {name}/{action} named parameters",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/agent-mcpserver-go122-servemux",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/411"
+    },
+    {
+      "index": 5,
+      "description": "handleSkills (skills.go) — replace nested TrimPrefix+SplitN source routing with named parameter routes",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/handleskills-go122-servemux",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/412"
+    },
+    {
+      "index": 6,
+      "description": "handleVault (vault.go) — replace 62-line routing dispatcher with explicit per-route registrations, move lock guard to each sub-handler",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/handlevault-go122-servemux",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/413"
+    },
+    {
+      "index": 7,
+      "description": "handleRegistry (registry.go) — use {path...} wildcard for file routes, split handleRegistrySkillAction by action",
+      "build_skill": "feature-dev",
+      "status": "pending",
+      "branch": null,
+      "pr_url": null
+    }
+  ]
+}

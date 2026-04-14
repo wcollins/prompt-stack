@@ -1,0 +1,26 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/real-tokenizer-cl100k-api/feature-prompt.md",
+  "feature_name": "real-tokenizer-cl100k-api",
+  "workflow": "fork",
+  "issue_number": 358,
+  "total_phases": 2,
+  "current_phase": 1,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Embedded cl100k default: add tiktoken-go dependency, implement TiktokenCounter, update config and gateway_builder, extend status API, add StatusBar badge, tests, package comment, examples",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/cl100k-embedded-tokenizer",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/359"
+    },
+    {
+      "index": 1,
+      "description": "API opt-in mode: implement APICounter with stdlib HTTP, wire gateway.tokenizer api config, startup validation, mock tests",
+      "build_skill": "feature-dev",
+      "status": "pending",
+      "branch": null,
+      "pr_url": null
+    }
+  ]
+}

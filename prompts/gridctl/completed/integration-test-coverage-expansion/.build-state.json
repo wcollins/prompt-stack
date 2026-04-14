@@ -1,0 +1,50 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/integration-test-coverage-expansion/feature-prompt.md",
+  "feature_name": "integration-test-coverage-expansion",
+  "workflow": "fork",
+  "issue_number": 393,
+  "total_phases": 5,
+  "current_phase": 4,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Remediate orchestrator_test.go — move to pkg/runtime/orchestrator_test.go, verify unit tests pass",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "refactor/remediate-orchestrator-test-article-iv",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/394"
+    },
+    {
+      "index": 1,
+      "description": "Implement transport tests (transport_test.go) — validates mock server subprocess helpers; these helpers will be reused by gateway tests",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/mcp-transport-integration-tests",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/395"
+    },
+    {
+      "index": 2,
+      "description": "Implement hot reload tests (hot_reload_test.go) — self-contained, only needs Docker runtime + temp file",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/hot-reload-integration-tests",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/397"
+    },
+    {
+      "index": 3,
+      "description": "Implement gateway lifecycle tests (gateway_lifecycle_test.go) — builds on transport test helpers",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/gateway-lifecycle-integration-tests",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/398"
+    },
+    {
+      "index": 4,
+      "description": "Implement skills executor tests (skills_executor_test.go) — builds on gateway test helpers",
+      "build_skill": "feature-dev",
+      "status": "pending",
+      "branch": null,
+      "pr_url": null
+    }
+  ]
+}

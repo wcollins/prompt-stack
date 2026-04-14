@@ -1,0 +1,26 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/pin-drift-web-ui/feature-prompt.md",
+  "feature_name": "pin-drift-web-ui",
+  "workflow": "fork",
+  "issue_number": 362,
+  "total_phases": 2,
+  "current_phase": 1,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Foundation: TypeScript types, API functions (fetchServerPins, approveServerPins), usePinsStore Zustand store, polling integration in usePolling.ts, Toast extension (warning type + action prop)",
+      "build_skill": "frontend-design",
+      "status": "completed",
+      "branch": "feature/pin-drift-web-ui-foundation",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/363"
+    },
+    {
+      "index": 1,
+      "description": "UI Components: PinDriftBadge, StatusBar wiring, CustomNode drift/blocked indicator blocks, Pins panel tab with inline approve buttons, drift toast notification",
+      "build_skill": "frontend-design",
+      "status": "pending",
+      "branch": null,
+      "pr_url": null
+    }
+  ]
+}
