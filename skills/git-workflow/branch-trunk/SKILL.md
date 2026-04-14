@@ -50,33 +50,23 @@ Based on the task description in `$ARGUMENTS`:
 | "update README with new install steps" | `docs/readme-install-steps` |
 | "bump neovim plugin versions" | `chore/bump-neovim-plugins` |
 
-### 4. Confirm Branch Name
-
-Use `AskUserQuestion` to present the generated branch name and let user confirm or provide alternative.
-
-### 5. Create and Switch to Branch
+### 4. Create and Switch to Branch
 
 ```bash
-git checkout -b <confirmed-branch-name>
+git checkout -b <branch-name>
 ```
 
-### 6. Make Requested Changes
+### 5. Return Control
 
-Implement the task described in `$ARGUMENTS`. Make all necessary file changes.
-
-### 7. Return Control to User
-
-After completing changes, inform the user:
-
-> Changes complete on branch `<branch-name>`.
+> Branch `<branch-name>` created and checked out.
 >
 > Next steps:
-> 1. Review changes: `git diff`
-> 2. Test locally
-> 3. When ready, run `/pr-trunk` to commit and create pull request
+> 1. Make changes
+> 2. When ready, run `/pr-trunk` to commit and create pull request
 
 ## Important Rules
 
 - **Do NOT create any commits**
 - **Do NOT push to remote**
-- Control returns to user for testing and validation
+- **Do NOT implement changes** — branching only creates the branch
+- Generate the branch name automatically — do not ask for confirmation

@@ -1,0 +1,26 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/podman-graduation/feature-prompt.md",
+  "feature_name": "podman-graduation",
+  "workflow": "fork",
+  "issue_number": 422,
+  "total_phases": 2,
+  "current_phase": 2,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Add multi-container networking integration test proving rootless Podman inter-container DNS works on a shared named network",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/podman-multicontainer-networking-test",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/423"
+    },
+    {
+      "index": 1,
+      "description": "Add netavark/aardvark-dns detection, version gate, controller warnings, remove all experimental markers, fix documentation",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/podman-graduation-stable",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/424"
+    }
+  ]
+}

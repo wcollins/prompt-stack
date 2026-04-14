@@ -93,6 +93,11 @@ For repositories where you have direct push access (single main branch):
 | Skill | Description |
 |-------|-------------|
 | `/feature-scout` | Pre-development feature exploration and evaluation |
+| `/feature-build <prompt-path>` | Build features from validated prompts — branch, issue, build, PR |
+| `/feature-build continue` | Continue to the next phase of a multi-phase build |
+| `/bug-scout` | Pre-fix bug investigation, triage, and root cause analysis |
+| `/bug-build <prompt-path>` | Fix bugs from validated bug-scout prompts — branch, issue, fix, PR |
+| `/bug-build continue` | Continue to the next phase of a multi-phase fix |
 | `/feature-dev` | Guided 7-phase feature development workflow |
 | `/frontend-design` | Create distinctive, production-grade frontend interfaces |
 

@@ -10,6 +10,7 @@
 # - prompt-stack: branch-trunk, pr-trunk, reset-trunk, etc.
 # - feature-dev: feature-dev
 # - feature-scout: feature-scout
+# - bug-scout: bug-scout
 # - frontend-design: frontend-design
 # - ralph-wiggum: ralph-loop, cancel-ralph, help
 # - podcast: tcg-prep
@@ -25,6 +26,7 @@ PLUGINS_DIR="${SCRIPT_DIR}/plugins"
 
 # Bundled plugins to install
 BUNDLED_PLUGINS=(
+    "bug-scout"
     "feature-dev"
     "feature-scout"
     "frontend-design"
@@ -248,6 +250,10 @@ main() {
     else
         warn "No CLAUDE.md found in $SCRIPT_DIR"
     fi
+
+    # Write prompt-stack root path so skills can locate prompts/
+    echo "$SCRIPT_DIR" > "$CLAUDE_DIR/.prompt-stack-root"
+    info "Wrote prompt-stack root: $SCRIPT_DIR"
 
     echo
     echo -e "${GREEN}Installation complete!${NC}"
