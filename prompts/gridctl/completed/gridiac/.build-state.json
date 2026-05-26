@@ -1,0 +1,32 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/gridiac/feature-prompt.md",
+  "feature_name": "gridiac",
+  "workflow": "fork",
+  "issue_number": 2,
+  "issue_repo": "gridctl/gridiac",
+  "test_repo": "gridctl/gridiac-demo-infra",
+  "current_sub_phase": "0b",
+  "phase": "0",
+  "sub_phases": [
+    {
+      "id": "0a",
+      "description": "grid-common: mirror git/* and config/expand.go from gridctl with // MIRROR: comments",
+      "repo_dir": "/Users/william/code/grid/grid-common",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/mirror-gridctl-packages",
+      "pr_url": "https://github.com/gridctl/grid-common/pull/2",
+      "issue_link": "Part of #2"
+    },
+    {
+      "id": "0b",
+      "description": "gridiac: bare-bones prototype CLI (spec parser, LLM, HCL gen for VPC, tofu wrapper, OPA, in-toto, PR comment)",
+      "repo_dir": "/Users/william/code/grid/gridiac",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "feature/wedge-mvp-prototype",
+      "pr_url": "https://github.com/gridctl/gridiac/pull/3",
+      "issue_link": "Closes #2"
+    }
+  ]
+}

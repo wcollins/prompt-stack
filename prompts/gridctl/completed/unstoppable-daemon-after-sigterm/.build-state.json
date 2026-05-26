@@ -1,0 +1,34 @@
+{
+  "prompt_file": "/Users/william/code/prompt-stack/prompts/gridctl/unstoppable-daemon-after-sigterm/bug-prompt.md",
+  "bug_name": "unstoppable-daemon-after-sigterm",
+  "workflow": "fork",
+  "issue_number": 618,
+  "total_phases": 3,
+  "current_phase": 2,
+  "phases": [
+    {
+      "index": 0,
+      "description": "Cancel the root ctx on signal: replace context.Background() in runServeStackless and runApply with signal.NotifyContext; waitForShutdown listens on <-ctx.Done() instead of a local signal channel. Add an integration test that asserts the daemon exits within 15s under SIGTERM.",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "fix/daemon-exit-on-sigterm",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/619"
+    },
+    {
+      "index": 1,
+      "description": "Defer state.Delete to actual process exit: move it to a defer in runStacklessDaemonChild and runDaemonChild immediately after state.Save succeeds; remove the state.Delete calls from waitForShutdown.",
+      "build_skill": "feature-dev",
+      "status": "completed",
+      "branch": "fix/defer-state-delete-to-exit",
+      "pr_url": "https://github.com/gridctl/gridctl/pull/620"
+    },
+    {
+      "index": 2,
+      "description": "Orphan-discovery fallback in gridctl stop: add state.FindOrphan (port probe + pgrep), --force flag, and actionable error when the state file is missing but a daemon is alive. Add unit tests for orphan handling.",
+      "build_skill": "feature-dev",
+      "status": "pending",
+      "branch": null,
+      "pr_url": null
+    }
+  ]
+}
