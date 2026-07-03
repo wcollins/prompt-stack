@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-Global Claude Code configuration for all projects.
+Global agent configuration for all projects.
 
 ## Workflows
 
