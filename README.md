@@ -15,7 +15,7 @@ cd ~/code/prompt-stack
 Restart Claude Code. All skills are now available as `/commands`.
 
 > [!NOTE]
-> `setup.sh` symlinks skill directories to `~/.claude/skills/` and is safe to re-run. It also links `CLAUDE.md` to `~/.claude/CLAUDE.md` for global configuration.
+> `setup.sh` symlinks skill directories to `~/.claude/skills/` and is safe to re-run. It also links `AGENTS.md` (global configuration) and `CLAUDE.md` (a one-line `@AGENTS.md` import shim) into `~/.claude/`.
 
 ## Skills
 
@@ -353,7 +353,8 @@ Choose "Demo workflow" and describe the sequence. The skill builds a tape with m
 ```
 prompt-stack/
 ├── setup.sh                      # Installation script
-├── CLAUDE.md                     # Global Claude Code configuration
+├── AGENTS.md                     # Global agent configuration
+├── CLAUDE.md                     # Import shim (@AGENTS.md)
 ├── skills/                       # Standalone skills
 │   ├── git-workflow/             # branch, pr, reset, onboard (fork + trunk)
 │   ├── gridctl/                  # Release and sync management

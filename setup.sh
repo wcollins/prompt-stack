@@ -243,8 +243,13 @@ main() {
     done
     echo
 
-    # Link CLAUDE.md for global configuration
+    # Link AGENTS.md and its CLAUDE.md import shim for global configuration
     echo "Linking global configuration..."
+    if [[ -f "$SCRIPT_DIR/AGENTS.md" ]]; then
+        link_file "$SCRIPT_DIR/AGENTS.md" "$CLAUDE_DIR/AGENTS.md"
+    else
+        warn "No AGENTS.md found in $SCRIPT_DIR"
+    fi
     if [[ -f "$SCRIPT_DIR/CLAUDE.md" ]]; then
         link_file "$SCRIPT_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
     else
