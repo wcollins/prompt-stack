@@ -17,3 +17,6 @@ Thumbs.db
 
 # Runtime state files
 *.local.md
+
+# Prompt working files
+prompts/
